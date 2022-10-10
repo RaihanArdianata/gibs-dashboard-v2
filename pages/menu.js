@@ -36,6 +36,9 @@ const CustomModal = ({ open, onClose, onSubmit, loading, listMenu }) => {
         >
             <Fade in={open}>
                 <Card sx={style}>
+                    <Typography id="spring-modal-title" variant="h6" component="h1" fontSize={20} pb={5}>
+                        Create Menu
+                    </Typography>
                     <Formik
                         initialValues={{
                             name: "",

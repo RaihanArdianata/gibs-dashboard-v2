@@ -8,13 +8,13 @@ const wsLink =
     typeof window !== "undefined"
         ? new GraphQLWsLink(
             createClient({
-                url: 'ws://localhost:8000/graphql'
+                url: process.env.NEXT_PUBLIC_WS_API_HOST || 'ws://localhost:8000/graphql'
             })
         )
         : null;
 
 const httpLink = new HttpLink({
-    uri: `http://localhost:8000/graphql`,
+    uri: process.env.NEXT_PUBLIC_API_HOST || `http://localhost:8000/graphql`,
 });
 
 const splitLink = typeof window !== "undefined" && wsLink != null
