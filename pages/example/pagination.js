@@ -1,5 +1,5 @@
 import { Grid, Pagination, Stack } from "@mui/material";
-import BaseCard from "../components/baseCard/BaseCard";
+import BaseCard from "components/baseCard/BaseCard";
 
 const Paginations = () => {
   return (
