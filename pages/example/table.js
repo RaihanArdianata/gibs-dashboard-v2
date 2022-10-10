@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import ProductPerfomance from "../src/components/dashboard/ProductPerfomance";
+import ProductPerfomance from "components/dashboard/ProductPerfomance";
 
 const Tables = () => {
   return (

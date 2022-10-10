@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import FeatherIcon from "feather-icons-react";
 import moment from 'moment/moment';
 
-import { Fade } from "../src/components/animation/fade";
+import { Fade } from "components/animation/fade";
 import { FastField, Field, Form, Formik } from 'formik';
 import useDisclosure from 'hook/useDisclosure';
 import { styled } from '@mui/material/styles';

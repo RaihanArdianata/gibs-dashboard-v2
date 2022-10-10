@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { isEmpty } from 'lodash';
 import { Backdrop, Button, Card, Checkbox, Chip, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, InputLabel, MenuItem, Modal, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material';
-import ProductPerfomance from "../src/components/dashboard/ProductPerfomance";
+import ProductPerfomance from "components/dashboard/ProductPerfomance";
 import { CreateMenu, DeleteMenu, GetAllMenu } from '../src/gql/hook/menu';
 import useDisclosure from '../src/hook/useDisclosure';
 import { Formik, Field, Form, FastField } from "formik";
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Fade } from "../src/components/animation/fade";
+import { Fade } from "components/animation/fade";
 
 const style = {
     position: 'absolute',
