@@ -7,7 +7,7 @@ import {
   Fab,
   ButtonGroup,
 } from "@mui/material";
-import BaseCard from "../src/components/baseCard/BaseCard";
+import BaseCard from "components/baseCard/BaseCard";
 import FeatherIcon from "feather-icons-react";
 
 const Buttons = () => {

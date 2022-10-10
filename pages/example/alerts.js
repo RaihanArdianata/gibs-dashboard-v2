@@ -1,5 +1,5 @@
 import { Grid, Alert, Stack, AlertTitle } from "@mui/material";
-import BaseCard from "../src/components/baseCard/BaseCard";
+import BaseCard from "components/baseCard/BaseCard";
 
 const Alerts = () => {
   return (
