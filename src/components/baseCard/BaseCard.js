@@ -15,7 +15,7 @@ const BaseCard = ({ header, children }) => {
       <Box p={2} display="flex" alignItems="center">
         {header}
       </Box>
-      <CardContent>{children}</CardContent>
+      <CardContent sx={{ overflow: 'auto' }}>{children}</CardContent>
     </Card>
   );
 };

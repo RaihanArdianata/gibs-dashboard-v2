@@ -57,7 +57,7 @@ const ProductPerfomance = ({ tableTitle, header = [], tableData = [] }) => {
             </TableRow>
           ))}
         </TableHead>
-        <TableBody {...getTableBodyProps()}>
+        <TableBody {...getTableBodyProps()} sx={{ overflow: 'scroll' }}>
           {rows.map((row, index) => {
             prepareRow(row);
             return (

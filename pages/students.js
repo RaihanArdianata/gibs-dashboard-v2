@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { isEmpty } from 'lodash';
-import { Backdrop, Button, Card, Checkbox, Chip, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, InputLabel, MenuItem, Modal, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material';
-import ProductPerfomance from "../src/components/dashboard/ProductPerfomance";
-import { CreateMenu, DeleteMenu, GetAllMenu } from '../src/gql/hook/menu';
-import useDisclosure from '../src/hook/useDisclosure';
-import { Formik, Field, Form, FastField } from "formik";
-import LoadingButton from '@mui/lab/LoadingButton';
+import { LoadingButton } from '@mui/lab';
+import { Backdrop, Button, Card, Checkbox, Chip, FormControl, FormControlLabel, FormGroup, Grid, InputLabel, MenuItem, Modal, Select, Stack, TextField, Typography } from '@mui/material';
+import ProductPerfomance from 'components/dashboard/ProductPerfomance';
+import { DeleteStudents, GetAllStudents } from 'gql/hook/students';
+import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
+import React, { useState } from 'react';
+import FeatherIcon from "feather-icons-react";
+import moment from 'moment/moment';
+
 import { Fade } from "../src/components/animation/fade";
+import { FastField, Field, Form, Formik } from 'formik';
+import useDisclosure from 'hook/useDisclosure';
 
 const style = {
     position: 'absolute',
@@ -149,51 +152,52 @@ const CustomModal = ({ open, onClose, onSubmit, loading, listMenu }) => {
     );
 };
 
-function Menu() {
-    const { data, error, loading, refetch } = GetAllMenu();
-    const { addMenu, error: errorCreateMenu, loading: loadingCreateMenu } = CreateMenu();
-    const { deleteMenu, error: errorDeleteMenu, loading: loadingDeleteMenu } = DeleteMenu();
+
+function Students() {
+    const { data, error, loading, refetch } = GetAllStudents();
+    const { deleteStudent, error: errorDeleteStudents, loading: loadingDeleteStudents } = DeleteStudents();
     const { open, handleClose, handleOpen } = useDisclosure();
 
-    const onSubmit = async (values) => {
-        await addMenu({
+    const onDelete = async (values) => {
+        await deleteStudent({
             variables: {
-                data: {
-                    ...values,
-                },
+                deleteStudentId: values
             },
         });
         refetch();
     };
 
-    const onDelete = async (values) => {
-        await deleteMenu({
-            variables: {
-                deleteMenuId: values
-            },
-        });
-        refetch();
-    };
 
     const headerTable = [
         {
-            Header: 'Menu Name',
+            Header: 'NIS',
+            accessor: 'nis',
+        },
+        {
+            Header: 'Name',
             accessor: 'name',
         },
         {
-            Header: 'URL',
-            accessor: 'url',
-        },
-        {
-            Header: 'Image',
-            accessor: 'menuImage',
+            Header: 'Birth Date/Places',
+            accessor: null,
             Cell: ({ row }) => (
-                row.original.menuImage && <Chip label="Preview" color="primary" variant="outlined" sx={{ cursor: 'pointer' }} />
+                <>
+                    {`${row.original.birth_place} / ${moment(row.original.birth_date).format("ll")}`}
+                </>
             )
         },
         {
-            Header: 'Level',
-            accessor: 'level',
+            Header: 'Email',
+            accessor: 'email',
+        },
+        {
+            Header: 'Gender',
+            accessor: 'gender',
+            Cell: ({ row, value }) => (
+                <>
+                    {value ? <Chip label="Male" color="info" variant="outlined" sx={{ cursor: 'pointer' }} /> : <Chip label="Female" color="error" variant="outlined" sx={{ cursor: 'pointer' }} />}
+                </>
+            )
         },
         {
             Header: 'Action',
@@ -203,7 +207,7 @@ function Menu() {
                     <Button variant="contained" color="warning">
                         Edit
                     </Button>
-                    <LoadingButton variant="contained" color="error" onClick={() => onDelete(row.original.id)} loading={loadingDeleteMenu}>
+                    <LoadingButton variant="contained" color="error" onClick={() => onDelete(row.original.id)} loading={loadingDeleteStudents}>
                         Delete
                     </LoadingButton>
                 </Stack>
@@ -211,13 +215,14 @@ function Menu() {
         },
     ];
 
+
     return (
         <>
             <Grid container spacing={0}>
                 <Grid item xs={12} lg={12}>
-                    <ProductPerfomance tableData={data?.menuList ?? []} header={headerTable} tableTitle={<>
+                    <ProductPerfomance tableData={data?.students ?? []} header={headerTable} tableTitle={<>
                         <Stack direction="row" justifyContent="space-between" alignItems="center" display="flex" width="100%">
-                            <Typography variant="h4">Menu Table</Typography>
+                            <Typography variant="h4">Students Table</Typography>
                             <Button variant="contained" color="success" onClick={handleOpen}>
                                 Add
                             </Button>
@@ -225,9 +230,9 @@ function Menu() {
                     </>} />
                 </Grid>
             </Grid>
-            <CustomModal onClose={handleClose} open={open} onSubmit={onSubmit} loading={loadingCreateMenu} listMenu={data?.menuList ?? []} />
+            <CustomModal onClose={handleClose} open={open} onSubmit={() => { }} loading={false} listMenu={[]} />
         </>
     );
 }
 
-export default Menu;
+export default Students;
