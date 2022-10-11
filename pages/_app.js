@@ -19,7 +19,7 @@ export default function MyApp(props) {
   return (
     <ApolloProvider client={client}>
       <Head>
-        <meta http-equiv="Content-Security-Policy" content="default-src http:" />
+        {/* <meta http-equiv="Content-Security-Policy" content="default-src http:" /> */}
       </Head>
       <CacheProvider value={emotionCache}>
         <Head>
