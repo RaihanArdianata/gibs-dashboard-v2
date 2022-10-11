@@ -3,7 +3,9 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import WebSocket from 'ws';
-
+console.log('====================================');
+console.log(process.env.NEXT_PUBLIC_API_HOST);
+console.log('====================================');
 const wsLink =
     typeof window !== "undefined"
         ? new GraphQLWsLink(

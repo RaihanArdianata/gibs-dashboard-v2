@@ -18,6 +18,9 @@ export default function MyApp(props) {
 
   return (
     <ApolloProvider client={client}>
+      <Head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+      </Head>
       <CacheProvider value={emotionCache}>
         <Head>
           <title>Flexy NextJs Starter kit page</title>
